@@ -69,6 +69,15 @@ def run_simulation():
         vals, val_counts = np.unique(matrix, return_counts=True)
         max_val = matrix.max()
 
+        # Calculate entropy, energy, and temperature
+        vals, counts = np.unique(matrix, return_counts=True)
+        probs = counts / num_cells
+        entropy = -np.sum(probs * np.log(probs)) * num_cells
+        mean_energy = matrix.mean()
+        beta = np.log(1 + 1 / mean_energy)
+        temperature = 1 / beta  
+        
+
         # Build full frequency array from 0 to max_val
         full_counts = np.zeros(max_val + 1, dtype=int)
         full_counts[vals] = val_counts
@@ -87,12 +96,12 @@ def run_simulation():
 
         # Update Main Figure Title with total step count and top padding
         fig.suptitle(
-            f"Boltzmann Energy Exchange Simulation - Total Steps: {step_counter[0]:,}",
-            fontsize=14,
-            fontweight="bold",
-            y=0.98
-        )
-
+                    f"Boltzmann Simulation - Steps: {step_counter[0]:,}\n"
+                    f"Entropy (S): {entropy:.1f}  |  Temperature (T): {temperature:.3f} | Mean_energy: {mean_energy:.3f} | k_B = 1",
+                    fontsize=13,
+                    fontweight="bold",
+                    y=0.98
+                )
         return im,
 
     # Keep a strong reference to FuncAnimation so garbage collector doesn't stop it
