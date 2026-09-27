@@ -8,4 +8,5 @@ Apart from making AI models for physics on my first GitHub account jovan-AIcoder
 2. Pendulum simulation (using RK4)
 
 ## List of my physics simulations on Python
-1. 2D ising model
+1. Boltzmann distribution simulation
+2. 2D ising model
